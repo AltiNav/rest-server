@@ -1,6 +1,7 @@
 import { Router, Request, Response, NextFunction, type RequestHandler, type ErrorRequestHandler } from 'express'
 
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Express {
     interface Request {
       locals: Record<string, any>
@@ -18,10 +19,12 @@ class RestError extends Error {
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const notFoundRequestHandler: RequestHandler = (_req, res, _next) => {
   res.status(404).send('Not Found')
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const errorRequestHandler: ErrorRequestHandler = (err, _req, res, _next) => {
   if (err instanceof RestError) {
     if (err.contentType === 'json') {
